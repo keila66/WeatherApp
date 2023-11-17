@@ -6,7 +6,8 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
-    '@react-native-community'
+    '@react-native-community',
+    'plugin:prettier/recommended'
   ],
   overrides: [
     {
@@ -29,7 +30,10 @@ module.exports = {
   rules: {
     semi: ['error', 'never'],
     'comma-dangle': [2, 'never'],
-    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'react/jsx-filename-extension': [
+      1,
+      { extensions: ['.js', '.jsx', '.tsx'] }
+    ],
     'no-use-before-define': [
       'error',
       { functions: true, classes: true, variables: false }

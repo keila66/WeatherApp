@@ -1,59 +1,44 @@
-interface IWeatherType {
-  icon: string
-  message: string
-  backgroundColor: string
-}
-
-interface IWeatherTypes {
-  Thunderstorm: IWeatherType
-  Drizzle: IWeatherType
-  Rain: IWeatherType
-  Snow: IWeatherType
-  Clear: IWeatherType
-  Clouds: IWeatherType
-  Haze: IWeatherType
-  Mist: IWeatherType
-}
+import { IWeatherTypes } from '../types/types'
 
 export const weatherType: IWeatherTypes = {
   Thunderstorm: {
     icon: 'zap',
     message: 'It could get noisy',
-    backgroundColor: '#000000'
+    background: require('../../assets/thunderstorm.jpg')
   },
   Drizzle: {
     icon: 'cloud-rain',
     message: 'It might rains a little',
-    backgroundColor: '#36454f'
+    background: require('../../assets/drizzle.jpg')
   },
   Rain: {
     icon: 'umbrella',
     message: 'You will need an umbrella',
-    backgroundColor: '#0000ff'
+    background: require(`../../assets/rain.jpg`)
   },
   Snow: {
     icon: 'cloud-snow',
     message: 'Lets build a snowman',
-    backgroundColor: '#7f6065'
+    background: require('../../assets/snow.jpg')
   },
   Clear: {
     icon: 'sun',
     message: 'It is perfect t-shirt weather',
-    backgroundColor: '#e47200'
+    background: require('../../assets/clear.jpg')
   },
   Clouds: {
     icon: 'cloud',
     message: 'You could live in the clouds',
-    backgroundColor: '#363636'
+    background: require('../../assets/clouds.jpg')
   },
   Haze: {
     icon: 'wind',
     message: 'It might be a bit damp',
-    backgroundColor: '#58586e'
+    background: require('../../assets/haze.jpg')
   },
   Mist: {
     icon: 'align-justify',
     message: 'It might be hard to see',
-    backgroundColor: '#3e3e37'
+    background: require('../../assets/mist.jpg')
   }
 }

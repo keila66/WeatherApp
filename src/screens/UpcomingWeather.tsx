@@ -1,65 +1,18 @@
-import { Text, StyleSheet, FlatList, ImageBackground } from 'react-native'
+import { StyleSheet, FlatList, ImageBackground } from 'react-native'
 import React from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import ListItem from '../components/ListItem'
+import { IData } from '../types/types'
 
-interface IData {
-  dt: string
-  main: {
-    temp_min: number
-    temp_max: number
-  }
-  weather: [
-    {
-      main: string
-    }
-  ]
+interface UpcomingWeatherProps {
+  weatherData: IData[]
 }
 
-const DATA: IData[] = [
-  {
-    dt: '2023-02-18 12:00:00',
-    main: {
-      temp_min: 8.34,
-      temp_max: 7.24
-    },
-    weather: [
-      {
-        main: 'Clear'
-      }
-    ]
-  },
-  {
-    dt: '2023-02-18 15:00:00',
-    main: {
-      temp_min: 8.34,
-      temp_max: 7.24
-    },
-    weather: [
-      {
-        main: 'Clouds'
-      }
-    ]
-  },
-  {
-    dt: '2023-02-18 18:00:00',
-    main: {
-      temp_min: 8.34,
-      temp_max: 7.24
-    },
-    weather: [
-      {
-        main: 'Rain'
-      }
-    ]
-  }
-]
-
-const UpcomingWeather = () => {
+const UpcomingWeather = ({ weatherData }: UpcomingWeatherProps) => {
   const renderItem = ({ item }: { item: IData }) => (
     <ListItem
       condition={item.weather[0].main}
-      dt={item.dt}
+      dt={item.dt_txt}
       min={item.main.temp_min}
       max={item.main.temp_max}
     />
@@ -73,7 +26,7 @@ const UpcomingWeather = () => {
         style={image}
       >
         <FlatList
-          data={DATA}
+          data={weatherData}
           renderItem={renderItem}
           keyExtractor={(item) => item.dt}
         />

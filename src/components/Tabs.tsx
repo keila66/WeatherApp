@@ -1,74 +1,83 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { Feather } from '@expo/vector-icons'
 import CurrentWeather from '../screens/CurrentWeather'
 import UpcomingWeather from '../screens/UpcomingWeather'
 import City from '../screens/City'
+import { IWeather } from '../types/types'
 
 const Tab = createBottomTabNavigator()
 
-const Tabs = () => {
+interface TabsProps {
+  weather: IWeather
+}
+
+const Tabs = ({ weather }: TabsProps) => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: 'tomato',
+        tabBarActiveTintColor: '#F98804',
         tabBarInactiveTintColor: 'gray',
         tabBarLabel: () => null,
         tabBarIconStyle: {
           color: 'white'
         },
         tabBarStyle: {
-          backgroundColor: '#094580'
+          backgroundColor: '#f1f1f1'
         },
         headerStyle: {
-          backgroundColor: '#094580'
+          backgroundColor: '#f1f1f1'
         },
         headerTitleStyle: {
           fontWeight: 'bold',
           fontSize: 25,
-          color: 'tomato'
+          color: '#F98804'
         }
       }}
     >
       <Tab.Screen
         name={'Current'}
-        component={CurrentWeather}
         options={{
           tabBarIcon: ({ focused }) => (
             <Feather
               name={'droplet'}
               size={25}
-              color={focused ? 'tomato' : '#c4c4c4'}
+              color={focused ? '#F98804' : '#094580'}
             />
           )
         }}
-      />
+      >
+        {() => <CurrentWeather weatherData={weather?.list[0] || {}} />}
+      </Tab.Screen>
       <Tab.Screen
         name={'Upcoming Weather'}
-        component={UpcomingWeather}
         options={{
           tabBarIcon: ({ focused }) => (
             <Feather
               name={'clock'}
               size={25}
-              color={focused ? 'tomato' : '#c4c4c4'}
+              color={focused ? '#F98804' : '#094580'}
             />
           )
         }}
-      />
+      >
+        {() => <UpcomingWeather weatherData={weather?.list || []} />}
+      </Tab.Screen>
       <Tab.Screen
         name={'City'}
-        component={City}
         options={{
           tabBarIcon: ({ focused }) => (
             <Feather
               name={'home'}
               size={25}
-              color={focused ? 'tomato' : '#c4c4c4'}
+              color={focused ? '#F98804' : '#094580'}
             />
           )
         }}
-      />
+      >
+        {() => <City weatherData={weather?.city || {}} />}
+      </Tab.Screen>
     </Tab.Navigator>
   )
 }

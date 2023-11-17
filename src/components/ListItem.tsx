@@ -1,25 +1,30 @@
 import { Text, StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Feather } from '@expo/vector-icons'
+import { weatherType } from '../utilities/weatherType' 
+import { TypesList } from '../types/types'
+import moment from 'moment'
 
 interface ListItemProps {
   dt: string
   min: number
   max: number
-  condition: string
+  condition: TypesList
 }
 
 const ListItem = (props: ListItemProps) => {
-  const { dt, min, max } = props
+  const { dt, min, max, condition } = props
 
-  const { item, date, temp } = styles
+  const s = styles
 
   return (
-    <View style={item}>
-      <Feather name={'sun'} size={50} color={'white'} />
-      <Text style={date}>{dt}</Text>
-      <Text style={temp}>{min}</Text>
-      <Text style={temp}>{max}</Text>
+    <View style={s.item}>
+      <Feather name={weatherType[condition].icon} size={50} color={'white'} />
+    <View style={s.dateWrapper}>
+      <Text style={s.date}>{moment(dt).format('dddd')}</Text>
+      <Text style={s.date}>{moment(dt).format('h:mm:ss')}</Text>
+    </View>
+      <Text style={s.temp}>{min.toFixed()}°C | {max.toFixed()}°C</Text>
     </View>
   )
 }
@@ -33,7 +38,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     borderRadius: 5,
-    backgroundColor: '#094580'
+    backgroundColor: '#094480c8'
+    
   },
   temp: {
     color: 'white',
@@ -41,7 +47,10 @@ const styles = StyleSheet.create({
   },
   date: {
     color: 'white',
-    fontSize: 15
+    fontSize: 18
+  },
+  dateWrapper: {
+    flexDirection: 'column'
   }
 })
 
